@@ -1,4 +1,3 @@
-
 name: Build EXE for Windows
 
 on:
@@ -10,16 +9,20 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-    - run: npm install
-    - run: npm install -g electron-packager
-    - run: electron-packager . MyApp --platform=win32 --arch=x64 --out=build --overwrite
-    - uses: - uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v3
 
-      with:
-        name: windows-exe
-        path: build/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: npm install
+      - run: npm install -g electron-packager
+      - run: electron-packager . MyApp --platform=win32 --arch=x64 --out=build --overwrite
+
+      - name: Upload EXE Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: build/
+  
