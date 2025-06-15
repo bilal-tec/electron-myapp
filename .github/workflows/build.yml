@@ -1,0 +1,24 @@
+.github/workflows/build.yml
+name: Build EXE for Windows
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - run: npm install
+    - run: npm install -g electron-packager
+    - run: electron-packager . MyApp --platform=win32 --arch=x64 --out=build --overwrite
+    - uses: actions/upload-artifact@v3
+      with:
+        name: windows-exe
+        path: build/
