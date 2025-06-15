@@ -1,4 +1,4 @@
-.github/workflows/build.yml
+
 name: Build EXE for Windows
 
 on:
