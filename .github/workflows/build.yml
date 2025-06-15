@@ -18,7 +18,8 @@ jobs:
     - run: npm install
     - run: npm install -g electron-packager
     - run: electron-packager . MyApp --platform=win32 --arch=x64 --out=build --overwrite
-    - uses: actions/upload-artifact@v3
+    - uses: - uses: actions/upload-artifact@v4
+
       with:
         name: windows-exe
         path: build/
